@@ -1,24 +1,34 @@
 package com.scss.jobcoordi.service;
 
+import com.scss.jobcoordi.dto.*;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ChatService {
 
     // 첫 채팅때 폼 보내고 답변받아서 주기 ( 데이터 둘다 저장 )
-    public void startChat(){
+    public StartChatResponse startChat(StartChatRequest request){
 
+        StartChatResponse response = new StartChatResponse();
+
+        return response;
     }
 
     // 이후 일반 채팅
-    public void chat(){
+    public ChatResponse chat(ChatRequest request){
 
+        ChatResponse response = new ChatResponse();
+
+        return response;
     }
 
 
     // 아이디? 받아서 모든 채팅 내용 반환하기
-    public void getAllMessagesByUuid(){
+    public List<ChatResponse> getAllMessagesByUuid(String uuid){
 
+        return  List.of(new ChatResponse());
     }
 
 

@@ -1,15 +1,21 @@
 package com.scss.jobcoordi.repository;
 
+import java.util.List;
+
 public class ChatMessageRepository {
     // id, role 받아서 저장
     public void save(){}
 
     // id 받아서 이전 n개의 채팅 꺼내오기 ( ai서버로 보낼 용도. n개는 정해질거임)
-    public void getMessages(){}
+    public List<Integer> getMessages(){
+
+        return null;
+    }
 
     // id로 모든 채팅 반환
-    public void getAllMessagesByUuid(){
+    public List<Integer> getAllMessagesByUuid(){
 
+        return null;
     }
 
 
