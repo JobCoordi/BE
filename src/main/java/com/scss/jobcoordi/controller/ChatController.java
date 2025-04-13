@@ -32,7 +32,7 @@ public class ChatController {
     @GetMapping("/messages")
     public ResponseEntity<List<ChatResponse>> getAllMessages(String uuid){
 
-        return ResponseEntity.ok().body(chatService.getAllMessagesByUuid(uuid));
+        return ResponseEntity.ok().body(chatService.findAllMessagesByUuid(uuid));
     }
 
 }
