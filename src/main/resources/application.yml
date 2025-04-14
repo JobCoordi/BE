@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: JobCoordi
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/grepp_dao
+    username: min3
+    password: min3
+
+  jpa:
+    hibernate:
+      ddl-auto: create
