@@ -3,6 +3,7 @@ package com.scss.jobcoordi.controller;
 
 import com.scss.jobcoordi.dto.*;
 import com.scss.jobcoordi.service.ChatService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,13 @@ public class ChatController {
 
     // 첫 채팅
     @PostMapping("/start")
-    public ResponseEntity<StartChatResponse> startChat(@RequestBody StartChatRequest request){
+    public ResponseEntity<StartChatResponse> startChat(@RequestBody @Valid StartChatRequest request){
         return ResponseEntity.ok().body(chatService.startChat(request));
     }
 
     // 일반 채팅
     @PostMapping("/message")
-    public ResponseEntity<ChatResponse> chat(@RequestBody ChatRequest request){
+    public ResponseEntity<ChatResponse> chat(@RequestBody @Valid ChatRequest request){
 
         return ResponseEntity.ok().body(chatService.chat(request));
     }
@@ -34,5 +35,6 @@ public class ChatController {
 
         return ResponseEntity.ok().body(chatService.findAllMessagesByUuid(uuid));
     }
+
 
 }

@@ -4,16 +4,20 @@ import com.scss.jobcoordi.domain.ChatMessage;
 import com.scss.jobcoordi.domain.ChatRole;
 import com.scss.jobcoordi.domain.UserProfile;
 import com.scss.jobcoordi.dto.*;
+import com.scss.jobcoordi.exception.AiServiceException;
+import com.scss.jobcoordi.exception.UuidNotFoundException;
 import com.scss.jobcoordi.repository.ChatMessageRepository;
 import com.scss.jobcoordi.repository.UserProfileRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.scss.jobcoordi.utils.Utils.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ChatService {
@@ -50,6 +54,10 @@ public class ChatService {
     }
 
     private ChatMessage saveAndCallAi(String uuid, String content){
+        // uuid 검증
+        if(!userProfileRepository.existsByUuid(uuid)){
+            throw new UuidNotFoundException("해당 사용자의 채팅 기록이 없습니다.");
+        }
         // user 메시지 저장
         ChatMessage questionSaved = chatMessageRepository.save(
                 genChatMessage(content, uuid, ChatRole.user)
@@ -66,7 +74,12 @@ public class ChatService {
     // 예외처리 해야함
     // 챗봇 서버와 통신
     public String callAiServer(String uuid, String content){
-        // 두 값 주면서 답변받기
+        try{
+            // 두 값 주면서 챗봇 서버 호출
+
+        } catch (Exception e) {
+            throw new AiServiceException("챗봇 서버 쪽 에러인데 아직 안해봐서 모름");
+        }
 
         return "챗봇 서버에서 받은 임시 값이 표기 될 예정입니다.";
     }
@@ -74,8 +87,11 @@ public class ChatService {
 
     // 아이디? 받아서 모든 채팅 내용 반환
     public List<ChatResponse> findAllMessagesByUuid(String uuid){
-
-        return chatMessageRepository.findAllMessagesByUuid(uuid);
+        List<ChatResponse> allMessagesByUuid = chatMessageRepository.findAllMessagesByUuid(uuid);
+        if(allMessagesByUuid.isEmpty()){
+            throw new UuidNotFoundException("해당 사용자의 채팅 기록이 없습니다.");
+        }
+        return allMessagesByUuid;
     }
 
 
