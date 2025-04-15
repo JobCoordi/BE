@@ -19,11 +19,12 @@ public class ChatMessage {
     @Column(length = 36, nullable = false)
     private String uuid;
 
+    // 설계 변경으로 프론트에서도 사용 안하면 삭제 예정
     @Enumerated(EnumType.STRING)
     @Column(length = 9, nullable = false)
     private ChatRole role;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String content;
 
 

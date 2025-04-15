@@ -29,5 +29,15 @@ public class Utils {
                 .build();
     }
 
+    // 프로필 문자열로 포매팅
+    public static String formatProfile(UserProfile userProfile){
+        String profile = "출생년도 : " + userProfile.getBirthYear()
+                + "\n성별 : " + userProfile.getGender()
+                + "\n ..."
+                + "\n전공 : " + userProfile.getMajor()
+                + "\n그 외 : " + userProfile.getSelfDescription();
+        return profile;
+    }
+
 
 }

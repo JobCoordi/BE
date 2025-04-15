@@ -8,6 +8,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Table(name = "user_profiles")
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserProfile {
     @Id
