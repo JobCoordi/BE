@@ -25,7 +25,7 @@ class UserProfileRepositoryTests {
     @DisplayName("저장 테스트")
     void 저장() throws Exception {
 
-        UserProfile u1 = UserProfile.builder().birthYear(1999).selfDescription("z").build();
+        UserProfile u1 = UserProfile.builder().birthYear(1999).selfDescription("입력해야함").build();
         UserProfile saved = repository.save(u1);
         log.info("saved: {}", saved);
         assertThat(saved.getId()).isEqualTo(u1.getId());

@@ -41,7 +41,7 @@ class ChatMessageRepositoryTests {
     @DisplayName("여러개 잘 가져오나")
     void test1() throws Exception {
 
-        UserProfile u1 = UserProfile.builder().birthYear(1999).build();
+        UserProfile u1 = UserProfile.builder().birthYear(1999).selfDescription("입력해야함").build();
 
         ChatMessage userQuestion = genChatMessage("user test 1번임", u1.getUuid(), ChatRole.user);
         chatMessageRepository.save(userQuestion);
