@@ -1,9 +1,9 @@
-package com.scss.jobcoordi.utils;
+package com.scss.jobcoordi.chat.utils;
 
-import com.scss.jobcoordi.domain.ChatMessage;
-import com.scss.jobcoordi.domain.ChatRole;
-import com.scss.jobcoordi.domain.UserProfile;
-import com.scss.jobcoordi.dto.StartChatRequest;
+import com.scss.jobcoordi.chat.domain.ChatMessage;
+import com.scss.jobcoordi.chat.domain.ChatRole;
+import com.scss.jobcoordi.chat.domain.UserProfile;
+import com.scss.jobcoordi.chat.dto.StartChatRequest;
 
 public class Utils {
 

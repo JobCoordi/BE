@@ -1,4 +1,4 @@
-package com.scss.jobcoordi.exception;
+package com.scss.jobcoordi.chat.exceptions;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

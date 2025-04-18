@@ -1,4 +1,4 @@
-package com.scss.jobcoordi.dto;
+package com.scss.jobcoordi.chat.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

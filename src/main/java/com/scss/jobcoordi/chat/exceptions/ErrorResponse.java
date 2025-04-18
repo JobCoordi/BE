@@ -1,6 +1,4 @@
-package com.scss.jobcoordi.exception;
-
-import lombok.Getter;
+package com.scss.jobcoordi.chat.exceptions;
 
 public class ErrorResponse {
     private final String message;

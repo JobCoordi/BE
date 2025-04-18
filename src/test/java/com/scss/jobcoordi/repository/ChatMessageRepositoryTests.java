@@ -1,9 +1,10 @@
 package com.scss.jobcoordi.repository;
 
-import com.scss.jobcoordi.domain.ChatMessage;
-import com.scss.jobcoordi.domain.ChatRole;
-import com.scss.jobcoordi.domain.UserProfile;
-import com.scss.jobcoordi.dto.ChatResponse;
+import com.scss.jobcoordi.chat.domain.ChatMessage;
+import com.scss.jobcoordi.chat.domain.ChatRole;
+import com.scss.jobcoordi.chat.domain.UserProfile;
+import com.scss.jobcoordi.chat.dto.ChatResponse;
+import com.scss.jobcoordi.chat.repository.ChatMessageRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
-import static com.scss.jobcoordi.utils.Utils.genChatMessage;
+import static com.scss.jobcoordi.chat.utils.Utils.genChatMessage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

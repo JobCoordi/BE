@@ -1,4 +1,4 @@
-package com.scss.jobcoordi.dto;
+package com.scss.jobcoordi.chat.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

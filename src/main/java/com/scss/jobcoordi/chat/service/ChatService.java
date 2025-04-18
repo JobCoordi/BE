@@ -1,13 +1,16 @@
-package com.scss.jobcoordi.service;
+package com.scss.jobcoordi.chat.service;
 
-import com.scss.jobcoordi.domain.ChatMessage;
-import com.scss.jobcoordi.domain.ChatRole;
-import com.scss.jobcoordi.domain.UserProfile;
-import com.scss.jobcoordi.dto.*;
-import com.scss.jobcoordi.exception.AiServiceException;
-import com.scss.jobcoordi.exception.UuidNotFoundException;
-import com.scss.jobcoordi.repository.ChatMessageRepository;
-import com.scss.jobcoordi.repository.UserProfileRepository;
+import com.scss.jobcoordi.chat.domain.ChatMessage;
+import com.scss.jobcoordi.chat.domain.ChatRole;
+import com.scss.jobcoordi.chat.domain.UserProfile;
+import com.scss.jobcoordi.chat.dto.ChatRequest;
+import com.scss.jobcoordi.chat.dto.ChatResponse;
+import com.scss.jobcoordi.chat.dto.StartChatRequest;
+import com.scss.jobcoordi.chat.dto.StartChatResponse;
+import com.scss.jobcoordi.chat.exceptions.AiServiceException;
+import com.scss.jobcoordi.chat.exceptions.UuidNotFoundException;
+import com.scss.jobcoordi.chat.repository.ChatMessageRepository;
+import com.scss.jobcoordi.chat.repository.UserProfileRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.scss.jobcoordi.utils.Utils.*;
+import static com.scss.jobcoordi.chat.utils.Utils.*;
 
 @Slf4j
 @Service

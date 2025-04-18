@@ -1,8 +1,11 @@
-package com.scss.jobcoordi.controller;
+package com.scss.jobcoordi.chat.controller;
 
 
-import com.scss.jobcoordi.dto.*;
-import com.scss.jobcoordi.service.ChatService;
+import com.scss.jobcoordi.chat.dto.ChatRequest;
+import com.scss.jobcoordi.chat.dto.ChatResponse;
+import com.scss.jobcoordi.chat.dto.StartChatRequest;
+import com.scss.jobcoordi.chat.dto.StartChatResponse;
+import com.scss.jobcoordi.chat.service.ChatService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

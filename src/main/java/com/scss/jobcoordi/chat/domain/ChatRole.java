@@ -1,4 +1,4 @@
-package com.scss.jobcoordi.domain;
+package com.scss.jobcoordi.chat.domain;
 
 public enum ChatRole {
     user,

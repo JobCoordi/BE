@@ -1,6 +1,6 @@
-package com.scss.jobcoordi.dto;
+package com.scss.jobcoordi.chat.dto;
 
-import com.scss.jobcoordi.domain.ChatRole;
+import com.scss.jobcoordi.chat.domain.ChatRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
