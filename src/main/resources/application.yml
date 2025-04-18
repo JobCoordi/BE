@@ -3,9 +3,15 @@ spring:
     name: JobCoordi
 
   datasource:
-    url: jdbc:mysql://localhost:3306/job_coordi
-    username: min3
-    password: min3
+#    url: jdbc:mysql://localhost:3306/job_coordi
+#    username: min3
+#    password: min3
+    url: jdbc:mysql://job-coordi-db.cz084okusbse.ap-northeast-2.rds.amazonaws.com:3306/job_coordi
+    username: admin
+    password: JaLDmS$39v$M^X
+#    url: jdbc:mysql://localhost:3307/job_coordi?useSSL=false&serverTimezone=Asia/Seoul
+#    username: admin
+#    password: JaLDmS$39v$M^X
 
   jpa:
     hibernate:
