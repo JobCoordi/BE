@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.scss.jobcoordi.chat.utils.Utils.*;
 
@@ -28,23 +29,13 @@ public class ChatService {
     public final UserProfileRepository userProfileRepository;
     public final ChatMessageRepository chatMessageRepository;
 
-    // 첫 채팅때 폼 보내고 답변받아서 주기 ( 데이터 둘다 저장 )
+    // 첫 요청
     @Transactional
-    public StartChatResponse startChat(StartChatRequest request){
+    public String startChat(StartChatRequest request){
         // 프로필 저장
         UserProfile userSaved = userProfileRepository.save(genUserProfile(request));
 
-        // content 형식으로 변환
-        String userContent = formatProfile(userSaved);
-
-        ChatMessage resp = saveAndCallAi(userSaved.getUuid(), userContent);
-
-        return StartChatResponse.builder()
-                .ChatId(resp.getChatId())
-                .uuid(resp.getUuid())
-                .content(resp.getContent())
-                .createdAt(resp.getCreatedAt())
-                .build();
+        return userSaved.getUuid();
     }
 
     // 이후 일반 채팅
@@ -57,9 +48,10 @@ public class ChatService {
     }
 
     private ChatMessage saveAndCallAi(String uuid, String content){
-        // uuid 검증
-        if(!userProfileRepository.existsByUuid(uuid)){
-            throw new UuidNotFoundException("해당 사용자의 채팅 기록이 없습니다.");
+        // 첫 채팅
+        if(!chatMessageRepository.existsByUuid(uuid)){
+            UserProfile findUser = userProfileRepository.findByUuid(uuid).get();
+            content = formatProfile(findUser) + "\n메세지 : " + content;
         }
         // user 메시지 저장
         ChatMessage questionSaved = chatMessageRepository.save(

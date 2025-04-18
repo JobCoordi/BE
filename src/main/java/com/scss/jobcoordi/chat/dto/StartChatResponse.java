@@ -12,10 +12,5 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class StartChatResponse {
-
-    private Long ChatId;
     private String uuid;
-    private String content;
-    private LocalDateTime createdAt;
-
 }

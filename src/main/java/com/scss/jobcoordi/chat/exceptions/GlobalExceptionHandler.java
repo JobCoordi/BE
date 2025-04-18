@@ -2,6 +2,7 @@ package com.scss.jobcoordi.chat.exceptions;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,6 +29,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AiServiceException.class)
     public ResponseEntity<ErrorResponse> AiServiceExceptionException(AiServiceException ex){
         return ResponseEntity.status(500).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleJsonParseError(HttpMessageNotReadableException ex) {
+        return ResponseEntity.status(400).body(new ErrorResponse("요청 본문(JSON)이 올바르지 않습니다."));
     }
 
     @ExceptionHandler(Exception.class)

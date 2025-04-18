@@ -21,7 +21,7 @@ public class ChatController {
 
     // 첫 채팅
     @PostMapping("/start")
-    public ResponseEntity<StartChatResponse> startChat(@RequestBody @Valid StartChatRequest request){
+    public ResponseEntity<String> startChat(@RequestBody StartChatRequest request){
         return ResponseEntity.ok().body(chatService.startChat(request));
     }
 

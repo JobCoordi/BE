@@ -9,6 +9,8 @@ public class Utils {
 
     public static UserProfile genUserProfile(StartChatRequest request) {
         return UserProfile.builder()
+                .username(request.getUsername())
+                .email(request.getEmail())
                 .birthYear(request.getBirthYear())
                 .gender(request.getGender())
                 .educationLevel(request.getEducationLevel())
@@ -31,11 +33,9 @@ public class Utils {
 
     // 프로필 문자열로 포매팅
     public static String formatProfile(UserProfile userProfile){
-        String profile = "출생년도 : " + userProfile.getBirthYear()
-                + "\n성별 : " + userProfile.getGender()
-                + "\n ..."
-                + "\n전공 : " + userProfile.getMajor()
-                + "\n그 외 : " + userProfile.getSelfDescription();
+        String profile = "이름 : " + userProfile.getUsername()
+                + "\n이메일 : " + userProfile.getEmail()
+                + "\n ...";
         return profile;
     }
 

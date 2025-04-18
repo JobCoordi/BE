@@ -10,9 +10,10 @@ import java.util.List;
 
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
 
+    boolean existsByUuid(String uid);
+
     // 모든 채팅 반환
     @Query("select new com.scss.jobcoordi.chat.dto.ChatResponse(c.chatId, c.content, c.createdAt) from ChatMessage c where c.uuid = :uuid")
     List<ChatResponse> findAllMessagesByUuid(String uuid);
-
 
 }
