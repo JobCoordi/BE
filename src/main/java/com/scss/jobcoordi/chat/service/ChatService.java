@@ -30,7 +30,7 @@ public class ChatService {
 
     // 첫 채팅때 폼 보내고 답변받아서 주기 ( 데이터 둘다 저장 )
     @Transactional
-    public StartChatResponse startChat(StartChatRequest request){
+    public StartChatResponse startChat(StartChatRequest request) {
         // 프로필 저장
         UserProfile userSaved = userProfileRepository.save(genUserProfile(request));
 
@@ -49,17 +49,17 @@ public class ChatService {
 
     // 이후 일반 채팅
     @Transactional
-    public ChatResponse chat(ChatRequest request){
+    public ChatResponse chat(ChatRequest request) {
 
         ChatMessage resp = saveAndCallAi(request.getUuid(), request.getContent());
 
         return new ChatResponse(resp.getChatId(), resp.getContent(), resp.getCreatedAt());
     }
 
-    private ChatMessage saveAndCallAi(String uuid, String content){
+    private ChatMessage saveAndCallAi(String uuid, String content) {
         // uuid 검증
-        if(!userProfileRepository.existsByUuid(uuid)){
-            throw new UuidNotFoundException("해당 사용자의 채팅 기록이 없습니다.");
+        if (!userProfileRepository.existsByUuid(uuid)) {
+            throw new UuidNotFoundException("해당 사용자가 없습니다. 폼데이터를 제출해주세요.");
         }
         // user 메시지 저장
         ChatMessage questionSaved = chatMessageRepository.save(
@@ -76,8 +76,8 @@ public class ChatService {
 
     // 예외처리 해야함
     // 챗봇 서버와 통신
-    public String callAiServer(String uuid, String content){
-        try{
+    public String callAiServer(String uuid, String content) {
+        try {
             // 두 값 주면서 챗봇 서버 호출
 
         } catch (Exception e) {
@@ -89,16 +89,13 @@ public class ChatService {
 
 
     // 아이디? 받아서 모든 채팅 내용 반환
-    public List<ChatResponse> findAllMessagesByUuid(String uuid){
+    public List<ChatResponse> findAllMessagesByUuid(String uuid) {
         List<ChatResponse> allMessagesByUuid = chatMessageRepository.findAllMessagesByUuid(uuid);
-        if(allMessagesByUuid.isEmpty()){
+        if (allMessagesByUuid.isEmpty()) {
             throw new UuidNotFoundException("해당 사용자의 채팅 기록이 없습니다.");
         }
         return allMessagesByUuid;
     }
-
-
-
 
 
 }

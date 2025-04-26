@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StartChatRequest {
+    private String username;
+    private String email;
     private int birthYear;
     private String gender;
     private String educationLevel;
@@ -17,7 +19,7 @@ public class StartChatRequest {
     private String interest;
     private String certifications;
     private String preferredWork;
-    @NotBlank(message = "내용을 입력해주세요.")
+//    @NotBlank(message = "내용을 입력해주세요.")
     private String selfDescription;
 
 }

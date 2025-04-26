@@ -1,6 +1,7 @@
 package com.scss.jobcoordi.chat.exceptions;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AiServiceException.class)
     public ResponseEntity<ErrorResponse> AiServiceExceptionException(AiServiceException ex){
         return ResponseEntity.status(500).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> DataIntegrityViolationExceptionException(DataIntegrityViolationException ex){
+        return ResponseEntity.status(400).body(new ErrorResponse("입력한 값이 db설정 값보다 큼"));
     }
 
     @ExceptionHandler(Exception.class)

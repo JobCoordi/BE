@@ -19,6 +19,12 @@ public class UserProfile {
     @Column(length = 36, nullable = false, unique = true)
     private String uuid;
 
+    @Column(length = 50, nullable = false)
+    private String username;
+
+    @Column(length = 50, nullable = false)
+    private String email;
+
     @Column(nullable = false)
     private Integer birthYear;
 
@@ -47,7 +53,7 @@ public class UserProfile {
     private String selfDescription;
 
     @Builder
-    public UserProfile(Integer birthYear, String career, String certifications, String educationLevel, String gender, String interest, String preferredWork, String major, String selfDescription) {
+    public UserProfile(String username, String email, Integer birthYear, String career, String certifications, String educationLevel, String gender, String interest, String preferredWork, String major, String selfDescription) {
         this.birthYear = (birthYear == null) ? 0 : birthYear;
         this.career = (career == null || career.isBlank()) ? "없음" : career;
         this.certifications = (certifications == null || certifications.isBlank()) ? "없음" : certifications;
@@ -56,7 +62,9 @@ public class UserProfile {
         this.interest = (interest == null || interest.isBlank()) ? "없음" : interest;
         this.preferredWork = (preferredWork == null || preferredWork.isBlank()) ? "없음" : preferredWork;
         this.major = (major == null || major.isBlank()) ? "없음" : major;
-        this.selfDescription = selfDescription;
+        this.selfDescription = (selfDescription == null || selfDescription.isBlank()) ? "없음" : selfDescription;
         this.uuid = UUID.randomUUID().toString();
+        this.username = (username == null || username.isBlank()) ? "비공개" : username;
+        this.email = (email == null || email.isBlank()) ? "없음" : email;
     }
 }
