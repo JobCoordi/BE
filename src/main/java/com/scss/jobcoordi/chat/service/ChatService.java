@@ -11,6 +11,9 @@ import com.scss.jobcoordi.chat.exceptions.AiServiceException;
 import com.scss.jobcoordi.chat.exceptions.UuidNotFoundException;
 import com.scss.jobcoordi.chat.repository.ChatMessageRepository;
 import com.scss.jobcoordi.chat.repository.UserProfileRepository;
+import com.scss.jobcoordi.chat.utils.ChatMapper;
+import com.scss.jobcoordi.chat.utils.UserProfileMapper;
+import com.scss.jobcoordi.chat.utils.Utils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.scss.jobcoordi.chat.utils.Utils.*;
 
 @Slf4j
 @Service
@@ -32,19 +34,14 @@ public class ChatService {
     @Transactional
     public StartChatResponse startChat(StartChatRequest request) {
         // 프로필 저장
-        UserProfile userSaved = userProfileRepository.save(genUserProfile(request));
+        UserProfile userSaved = userProfileRepository.save(UserProfileMapper.toEntity(request));
 
         // content 형식으로 변환
-        String userContent = formatProfile(userSaved);
+        String userContent = Utils.formatProfile(userSaved);
 
         ChatMessage resp = saveAndCallAi(userSaved.getUuid(), userContent);
 
-        return StartChatResponse.builder()
-                .ChatId(resp.getChatId())
-                .uuid(resp.getUuid())
-                .content(resp.getContent())
-                .createdAt(resp.getCreatedAt())
-                .build();
+        return StartChatResponse.fromEntity(resp);
     }
 
     // 이후 일반 채팅
@@ -63,14 +60,14 @@ public class ChatService {
         }
         // user 메시지 저장
         ChatMessage questionSaved = chatMessageRepository.save(
-                genChatMessage(content, uuid, ChatRole.user)
+                ChatMapper.genChatMessage(content, uuid, ChatRole.user)
         );
 
         // 챗봇 서버 호출 후 답변 저장 및 반환
         String aiContent = callAiServer(questionSaved.getUuid(), questionSaved.getContent());
 
         return chatMessageRepository.save(
-                genChatMessage(aiContent, questionSaved.getUuid(), ChatRole.assistant)
+                ChatMapper.genChatMessage(aiContent, questionSaved.getUuid(), ChatRole.assistant)
         );
     }
 

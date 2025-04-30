@@ -36,11 +36,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(400).body(new ErrorResponse("입력한 값이 db설정 값보다 큼"));
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> ExceptionException(Exception ex){
-        log.error("예상치 못한 예외 발생", ex);
-        return ResponseEntity.status(500).body(new ErrorResponse("생각지도 못한 오류 발생..! 발견 시 알려주기 바람"));
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorResponse> ExceptionException(Exception ex){
+//        log.error("예상치 못한 예외 발생", ex);
+//        return ResponseEntity.status(500).body(new ErrorResponse("생각지도 못한 오류 발생..! 발견 시 알려주기 바람"));
+//    }
 
 
 

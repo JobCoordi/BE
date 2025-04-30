@@ -1,5 +1,7 @@
 package com.scss.jobcoordi.chat.dto;
 
+import com.scss.jobcoordi.chat.domain.ChatMessage;
+import com.scss.jobcoordi.chat.domain.UserProfile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +20,12 @@ public class StartChatResponse {
     private String content;
     private LocalDateTime createdAt;
 
+    public static StartChatResponse fromEntity(ChatMessage chatMessage){
+        return StartChatResponse.builder()
+                .ChatId(chatMessage.getChatId())
+                .uuid(chatMessage.getUuid())
+                .content(chatMessage.getContent())
+                .createdAt(chatMessage.getCreatedAt())
+                .build();
+    }
 }

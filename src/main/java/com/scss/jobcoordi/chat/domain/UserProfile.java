@@ -1,10 +1,7 @@
 package com.scss.jobcoordi.chat.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,18 +16,6 @@ public class UserProfile {
     @Column(length = 36, nullable = false, unique = true)
     private String uuid;
 
-    @Column(length = 50, nullable = false)
-    private String username;
-
-    @Column(length = 50, nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private Integer birthYear;
-
-    @Column(length = 6, nullable = false)
-    private String gender;
-
     @Column(length = 30, nullable = false)
     private String educationLevel;
 
@@ -38,33 +23,25 @@ public class UserProfile {
     private String major;
 
     @Column(length = 300, nullable = false)
-    private String career;
-
-    @Column(length = 300, nullable = false)
     private String interest;
 
-    @Column(length = 300, nullable = false)
-    private String certifications;
+    @Column(length = 15, nullable = false)
+    private String personality;
 
-    @Column(length = 300, nullable = false)
+    @Column(length = 30, nullable = false)
     private String preferredWork;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String selfDescription;
+    @Column(length = 20, nullable = false)
+    private String desiredSalary;
 
     @Builder
-    public UserProfile(String username, String email, Integer birthYear, String career, String certifications, String educationLevel, String gender, String interest, String preferredWork, String major, String selfDescription) {
-        this.birthYear = (birthYear == null) ? 0 : birthYear;
-        this.career = (career == null || career.isBlank()) ? "없음" : career;
-        this.certifications = (certifications == null || certifications.isBlank()) ? "없음" : certifications;
-        this.educationLevel = (educationLevel == null || educationLevel.isBlank()) ? "모름" : educationLevel;
-        this.gender = (gender == null || gender.isBlank()) ? "모름" : gender;
-        this.interest = (interest == null || interest.isBlank()) ? "없음" : interest;
-        this.preferredWork = (preferredWork == null || preferredWork.isBlank()) ? "없음" : preferredWork;
-        this.major = (major == null || major.isBlank()) ? "없음" : major;
-        this.selfDescription = (selfDescription == null || selfDescription.isBlank()) ? "없음" : selfDescription;
-        this.uuid = UUID.randomUUID().toString();
-        this.username = (username == null || username.isBlank()) ? "비공개" : username;
-        this.email = (email == null || email.isBlank()) ? "없음" : email;
+    public UserProfile(String desiredSalary, String educationLevel, String interest, String major, String personality, String preferredWork, String uuid) {
+        this.desiredSalary = desiredSalary;
+        this.educationLevel = educationLevel;
+        this.interest = interest;
+        this.major = major;
+        this.personality = personality;
+        this.preferredWork = preferredWork;
+        this.uuid = uuid;
     }
 }
