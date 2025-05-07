@@ -3,6 +3,8 @@ package com.scss.jobcoordi.chat.service;
 import com.scss.jobcoordi.chat.domain.ChatMessage;
 import com.scss.jobcoordi.chat.domain.ChatRole;
 import com.scss.jobcoordi.chat.domain.UserProfile;
+import com.scss.jobcoordi.chat.dto.AiRequest;
+import com.scss.jobcoordi.chat.dto.AiResponse;
 import com.scss.jobcoordi.chat.dto.ChatRequest;
 import com.scss.jobcoordi.chat.dto.ChatResponse;
 import com.scss.jobcoordi.chat.dto.StartChatRequest;
@@ -18,6 +20,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class ChatService {
 
     public final UserProfileRepository userProfileRepository;
     public final ChatMessageRepository chatMessageRepository;
+    private final WebClient webClient;
 
     // 첫 채팅때 폼 보내고 답변받아서 주기 ( 데이터 둘다 저장 )
     @Transactional
@@ -74,14 +78,18 @@ public class ChatService {
     // 예외처리 해야함
     // 챗봇 서버와 통신
     public String callAiServer(String uuid, String content) {
+        AiRequest request = new AiRequest(uuid, content);
         try {
-            // 두 값 주면서 챗봇 서버 호출
-
+            return webClient.post()
+                .uri("https://congenial-meme-5jpxj9jqv47hp6g7-8000.app.github.dev/chat")
+                .bodyValue(request)
+                .retrieve()
+                .bodyToMono(AiResponse.class)
+                .block()
+                .getResponse();
         } catch (Exception e) {
             throw new AiServiceException("챗봇 서버 쪽 에러인데 아직 안해봐서 모름");
         }
-
-        return "챗봇 서버에서 받은 임시 값이 표기 될 예정입니다.";
     }
 
 
